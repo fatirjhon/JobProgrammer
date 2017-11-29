@@ -38,7 +38,7 @@ class UserRequest extends FormRequest
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal harus 6 huruf',
             'password.confirmed' => 'Password harus sama',
-            'datebirth.required' => 'Tanggal lahir harus diisi'
+            'datebirth.required' => 'Tanggal lahir harus diisi',
         ];
     }
 }

@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DataUsersRequest;
+use Session;
+use File;
+use App\UserDetail;
+use Sentinel;
+use DB;
 
 class DataUsersController extends Controller
 {
@@ -12,7 +18,9 @@ class DataUsersController extends Controller
     
     public function index()
     {
-        return view('user.index');
+        $data = Sentinel::getUser()->id;
+        $userdetail = UserDetail::where('user_id', '=', $data)->get();
+        return view('user.index')->with('userdetail', $userdetail);
     }
 
     /**
@@ -22,7 +30,15 @@ class DataUsersController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $data = Sentinel::getUser()->id;
+        $dicek = DB::table('user_details')->where('user_id', '=', $data)->first();
+        if ($dicek != null) {
+            Session::flash("notice", "Anda sudah melengkapi data pribadi");
+            return redirect()->route("DataUsers.index");
+        } else {
+            return view('user.form');
+        }
+        
     }
 
     /**
@@ -33,10 +49,10 @@ class DataUsersController extends Controller
      */
     public function store(DataUsersRequest $request)
     {
-        $data = $request->except(['cv_file']);
-        $data['user_id'] = $request->address;
-        $input['cv_file'] = time().'.'.$request->cv_file->getClientOriginalExtension();
-        $request->cv_file->move(public_path('cv'), $input['cv_file']);   
+        $data = $request->except(['sipi']);
+        $data['user_id'] = Sentinel::getUser()->id;
+        $data['sipi'] = time().'.'.$request->sipi->getClientOriginalExtension();
+        $request->sipi->move(public_path('sipi'), $data['sipi']);   
         UserDetail::create($data);
         Session::flash("notice", "Info berhasil dibuat");
         return redirect()->route("DataUsers.create");

@@ -11,11 +11,15 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $fillable = [
-        'email', 'password', 
+        'user_id', 'email', 'password', 
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
     
+    public function user() {
+		return $this->hasOne('App\UserDetail', 'user_id');
+		}
+	}
 }

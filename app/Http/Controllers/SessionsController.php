@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Sentinel;
 use Session;
+use redirect;
 use App\Http\Requests\SessionRequest;
 use DB;
 
@@ -15,24 +16,24 @@ class SessionsController extends Controller
     		Session::flash("notice", "Kamu berhasil login". $user->email);
     		return redirect('home');
     	} else {
-    		return view ('auth.login');
+    		return view('auth.login');
     	}
     }
 
     public function login_store(SessionRequest $request) {
     	if ($user = Sentinel::authenticate($request->all())) {
-    		Session::flash("notice", "Selamat Datang". $user->email);
+    		Session::flash("notice", "Selamat Datang ". $user->email);
             $login=Sentinel::getUser()->id ;
             $dicek= DB::table('user_details')->where('user_id', '=', $login)->first();
             if ($dicek != null) {
-                return redirect()->intended('dashboard');
+                return redirect()->intended('DataUsers');
             } else {
-                return redirect('DataUsers.create'); //can beres
+                return redirect()->route('DataUsers.create');
             }
 
     	} else {
     		Session::flash("error", "Login gagal");
-    		return view ('auth.login');
+    		return redirect('login');
     	}
     }
 

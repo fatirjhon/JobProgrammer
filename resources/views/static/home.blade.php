@@ -1,6 +1,8 @@
 @extends("layout.app")
 @section("content")
 
-<span>home</span>
+<section>
+	<h1>home</h1>
+</section>
 
 @stop

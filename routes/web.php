@@ -31,10 +31,6 @@ Route::post('login', 'SessionsController@login_store')->name('login.store');
 
 Route::get('logout', 'SessionsController@logout')->name('logout');
 
-Route::post('create', 'DataUsersController@store')->name('profile.create');
-
-Route::get('profile', 'DataUsersController@show')->name('profile.show');
-
 Route::resource('DataUsers','DataUsersController');
 
 // Route::resource('cv', 'SipiController');

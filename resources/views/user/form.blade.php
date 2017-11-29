@@ -1,14 +1,14 @@
 @extends("layout.app")
 @section("content")
 
-<form method="post" action="{{ URL::route('profile.create') }}" role="form">
-{{ csrf_field() }}	
+{!! Form::open(['route' => 'DataUsers.store', 'files' => 'true', 'class' => 'form-horizontal', 'role' => 'form']) !!}
+
 <!-- Isian Profile -->
 <section class="createprofile" id="createprofile">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="text-center">Profile</h2>
+				<h2 class="text-center">Lengkapi Profile</h2>
 				<hr>
 				<br>
 			</div>
@@ -59,6 +59,14 @@
 		<br>
 		<div class="row">
 			<div class="form-group">
+			    <label for="sipi">Upload CV</label>
+			    <input type="file" id="sipi" name="sipi">
+			    <p class="help-block">File berformat .pdf maksimal 2mb</p>
+	 		</div>
+ 		</div>
+  		<br>
+		<div class="row">
+			<div class="form-group">
 				<div class="col-sm-8 col-sm-offset-2">
 			    	<button type="submit" class="btn btn-primary">OK</button>
 		    	</div>
@@ -67,4 +75,5 @@
 	</div>
 </section>
 
+{!! Form::close() !!}
 @stop

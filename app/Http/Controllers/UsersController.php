@@ -21,7 +21,7 @@ class UsersController extends Controller
     	$age = Carbon::createFromDate($datebirth->year, $datebirth->month, $datebirth->day)->age;
     	if ($age < 17) {
     		Session::flash('error', 'Umur minimal harus 17 tahun');
-    		return view('auth.register');
+    		return redirect()->route('signup');
     	} else {
     		Sentinel::registerAndActivate($request->all());
     		Session::flash('notice', 'Kamu berhasil daftar baru');

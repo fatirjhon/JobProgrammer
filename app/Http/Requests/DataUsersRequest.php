@@ -23,12 +23,13 @@ class DataUsersRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->datauser;
+        $id = $this->userdetail;
         return [
-            'fullname' => 'required|max:255',
+            'fullname' => 'required|max:255,' .$id,
             'notelp' => 'required|min:10|max:14|regex:/(08)[0-9]{9}/',
             'placebirth' => 'required|max:255',
-            'address' => 'required|max:255'
+            'address' => 'required|max:255',
+            'sipi' => 'required|mimes:pdf|max:2000'
         ];
     }
 
@@ -38,7 +39,8 @@ class DataUsersRequest extends FormRequest
         'fullname.required' => 'Nama harus diisi',
         'notelp.required' => 'Nomor telepon harus diisi',
         'placebirth.required' => 'Tempat lahir harus diisi',
-        'address.required' => 'Alamat harus diisi'
+        'address.required' => 'Alamat harus diisi',
+        'sipi.required' => 'CV harus diunggah',
         ];
     }
 }
