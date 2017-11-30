@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('root');
 
 Route::get('jobprogrammer', function () {
     return view('static.home');
@@ -33,4 +33,10 @@ Route::get('logout', 'SessionsController@logout')->name('logout');
 
 Route::resource('DataUsers','DataUsersController');
 
-// Route::resource('cv', 'SipiController');
+Route::group(['prefix'=>'admin'], function(){
+
+	Route::resource('olah', 'AdminController');
+	Route::get('user-list','AdminController@show')->name('olah.list');
+	Route::get('user-edit','AdminController@user')->name('olah.user');
+
+});

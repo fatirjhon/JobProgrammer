@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserDetail;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct() {
+        $this->middleware('sentinel');
+        $this->middleware('sentinel.role');
+        }
+
     public function index()
     {
-        //
+        $usdet = UserDetail::where('sipi_status','=','Belum dibaca')->orderBy('created_at', 'asc')->get();
+        // dd ($usdet);
+        return view('admin.list')->with('usdet', $usdet);
     }
 
     /**

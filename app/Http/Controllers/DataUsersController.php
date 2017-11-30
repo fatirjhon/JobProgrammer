@@ -14,13 +14,21 @@ class DataUsersController extends Controller
 {
     public function __construct() {
         $this->middleware('sentinel');
+        $this->middleware('sentinel.role');
     }
     
     public function index()
     {
         $data = Sentinel::getUser()->id;
-        $userdetail = UserDetail::where('user_id', '=', $data)->get();
-        return view('user.index')->with('userdetail', $userdetail);
+        $dicek = DB::table('user_details')->where('user_id', '=', $data)->first();
+        if ($dicek != null) {
+            $userdetail = UserDetail::where('user_id', '=', $data)->get();
+            return view('user.index')->with('userdetail', $userdetail);
+        } else {
+            Session::flash("error", "Anda harus melengkapi data pribadi terlebih dahulu");
+            return view('user.form');
+        }
+        
     }
 
     /**
@@ -33,7 +41,7 @@ class DataUsersController extends Controller
         $data = Sentinel::getUser()->id;
         $dicek = DB::table('user_details')->where('user_id', '=', $data)->first();
         if ($dicek != null) {
-            Session::flash("notice", "Anda sudah melengkapi data pribadi");
+            Session::flash("error", "Anda sudah melengkapi data pribadi");
             return redirect()->route("DataUsers.index");
         } else {
             return view('user.form');

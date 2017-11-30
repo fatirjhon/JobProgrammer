@@ -11,7 +11,7 @@ class UserDetail extends Model
 
     protected $table = 'user_details';
     protected $fillable = [
-	'fullname', 'notelp', 'placebirth', 'datebirth', 'address', 'user_id', 'sipi'
+	'fullname', 'notelp', 'placebirth', 'datebirth', 'address', 'user_id', 'sipi', 'sipi_status'
 	];
 
 	public static function valid() {

@@ -11,15 +11,21 @@
         <ul class="nav navbar-nav navbar-right">
 
           <li>{!! link_to(route('home'), 'Home') !!}</li>
-        @if (Sentinel::check())
+        @if(Sentinel::check())
+        @if(Sentinel::getUser()->hasAccess('admin'))
+          <li>{!! link_to(route('olah.index'), 'Dashboard') !!}</li>
+          <li>{!! link_to(route('logout'), 'Logout') !!}</li>
+          <li><a>Wellcome {!! Sentinel::getUser()->email !!}</a></li>
+        @else
           <li>{!! link_to(route('DataUsers.index'), 'Dashboard') !!}</li>
           <li>{!! link_to(route('logout'), 'Logout') !!}</li>
           <li><a>Wellcome {!! Sentinel::getUser()->email !!}</a></li>
+        @endif
         @else
           <li>{!! link_to(route('signup'), 'Register') !!}</li>
           <li>{!! link_to(route('login'), 'Login') !!}</li>
         @endif
-      
+
       </ul>
       </div>
     </div>

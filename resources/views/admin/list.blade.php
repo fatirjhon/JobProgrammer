@@ -1,13 +1,13 @@
 @extends("layout.app")
 @section("content")
-<!-- @include('shared.left_nav') -->
-@foreach($userdetail as $usd)
+
+@foreach($usdet as $usd)
 
 <section class="profile" id="profile">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="text-center">Profile</h2>
+				<h2 class="text-center">Profile yang belum dikelola</h2>
 				<hr>
 				<br>
 			</div>
@@ -52,28 +52,6 @@
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-3">
 					<h4>{{$usd->placebirth}}</h4>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="sipi" id="sipi">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<h2 class="text-center">CV</h2>
-				<hr>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-					<h3><img src="{{{ asset('img/doc.png') }}}" alt="doc" width="110">
-					Status terakhir CV anda : "{{$usd->sipi_status}}"</h3>
 				</div>
 			</div>
 		</div>

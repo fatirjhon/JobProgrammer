@@ -23,7 +23,9 @@ class UsersController extends Controller
     		Session::flash('error', 'Umur minimal harus 17 tahun');
     		return redirect()->route('signup');
     	} else {
-    		Sentinel::registerAndActivate($request->all());
+            $user = Sentinel::registerAndActivate($request->all());
+            $userrole = Sentinel::findRoleByName('Pl');
+            $user->roles()->attach($userrole);
     		Session::flash('notice', 'Kamu berhasil daftar baru');
     		return redirect()->route('login');
     	}

@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use Closure
+use Closure;
 use Sentinel, Session;
 use Redirect;
 
@@ -17,15 +17,13 @@ class RoleSentinelMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Sentinel::inRole('admin') && Sentinel::getUser()->hasAccess([$request->route()->getName()])) {
+        if (Sentinel::inRole('pl') && Sentinel::getUser()->hasAccess([$request->route()->getName()])) {
             return $next($request);
-        }
-
-        elseif(Sentinel::getUser()->hasAccess('admin')) {
+        }else if(Sentinel::getUser()->hasAccess('admin')) {
             return $next($request);
             } else {
             Session::flash('error', 'You dont have privilege');
-            return redirect()->route('root');
+            return redirect::to('/jobprogrammer');
         }
     }
 }
