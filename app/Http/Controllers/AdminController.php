@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
         $usdet = UserDetail::where('sipi_status','=','Belum dibaca')->orderBy('created_at', 'asc')->get();
         // dd ($usdet);
-        return view('admin.list')->with('usdet', $usdet);
+        return view('admin.index')->with('usdet', $usdet);
     }
 
     /**
@@ -82,6 +82,25 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('users')->where('id', '=', $id)->delete();
+        DB::table('user_details')->where('user_id', '=', $id)->delete();
+        Session::flash("notice", "User telah dihapus");
+        return redirect()->route("olah.index");
+    }
+
+    public function terima($id)
+    {
+            $usdet = UserDetail::where('user_id','=',$id)->get()->first();
+            $usdet->sipi_status = "Diterima";
+            $usdet->save();
+        return redirect()->route("olah.index");
+    }
+
+    public function tolak($id)
+    {
+            $usdet = UserDetail::where('user_id','=',$id)->get()->first();
+            $usdet->sipi_status = "Ditolak";
+            $usdet->save();
+        return redirect()->route("olah.index");
     }
 }

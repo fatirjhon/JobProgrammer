@@ -3,6 +3,15 @@
 <!-- @include('shared.left_nav') -->
 @foreach($userdetail as $usd)
 
+<div class="container-fluid" id="dashboarduser">
+	<div class="row">
+		<div class="col-sm-12" >
+			<h1>Dashboard User</h1>
+			<br>
+		</div>
+	</div>
+</div>
+
 <section class="profile" id="profile">
 	<div class="container">
 		<div class="row">
