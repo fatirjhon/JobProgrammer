@@ -41,7 +41,7 @@ class DataUsersController extends Controller
         $data = Sentinel::getUser()->id;
         $dicek = DB::table('user_details')->where('user_id', '=', $data)->first();
         if ($dicek != null) {
-            Session::flash("error", "Anda sudah melengkapi data pribadi");
+            Session::flash("notice", "Anda sudah melengkapi data pribadi");
             return redirect()->route("DataUsers.index");
         } else {
             return view('user.form');

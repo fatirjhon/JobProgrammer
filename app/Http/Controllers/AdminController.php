@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UserDetail;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -48,7 +49,10 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $usdet = \DB::table('user_details')->paginate(1);
+        return view('admin.user', compact('usdet'));
+        // $usdet = UserDetail::where('fullname','!=','Admin')->orderBy('created_at', 'asc')->paginate(1);
+        // return view('admin.user')->with('usdet', $usdet);
     }
 
     /**
@@ -82,10 +86,11 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('users')->where('id', '=', $id)->delete();
-        DB::table('user_details')->where('user_id', '=', $id)->delete();
-        Session::flash("notice", "User telah dihapus");
-        return redirect()->route("olah.index");
+        $user = User::findOrFail($id);
+        $usdet = UserDetail::where('user_id', $id)->first();
+        if ($user->delete() && $usdet->delete()) {
+            return redirect()->route('olah.show');
+        }
     }
 
     public function terima($id)

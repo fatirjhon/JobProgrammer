@@ -14,6 +14,7 @@
         @if(Sentinel::check())
         @if(Sentinel::getUser()->hasAccess('admin'))
           <li>{!! link_to(route('olah.index'), 'Dashboard') !!}</li>
+          <li>{!! link_to(route('olah.show'), 'User') !!}</li>
           <li>{!! link_to(route('logout'), 'Logout') !!}</li>
           <li><a>Wellcome {!! Sentinel::getUser()->email !!}</a></li>
         @else

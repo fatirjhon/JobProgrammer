@@ -11,12 +11,16 @@ hr {
 }
 
 section {
-	min-height: 650px;
+	min-height: 580px;
 }
 
 .createprofile hr {
   width: 250px;
   border-top: 1px solid #000;
+}
+
+.carousel-caption {
+  top:-8px;
 }
 
 /*header*/

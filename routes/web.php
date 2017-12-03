@@ -36,8 +36,9 @@ Route::resource('DataUsers','DataUsersController');
 Route::group(['prefix'=>'admin'], function(){
 
 	Route::resource('olah', 'AdminController');
+	Route::get('olah/user','AdminController@show')->name('olah.show');
 	Route::get('terima/{user_id}','AdminController@terima')->name('olah.terima');
 	Route::get('tolak/{user_id}','AdminController@tolak')->name('olah.tolak');
-	Route::post('olah/hapus','AdminController@destroy')->name('olah.destroy');
+	Route::delete('olah/{id}','AdminController@destroy')->name('olah.delete');
 
 });

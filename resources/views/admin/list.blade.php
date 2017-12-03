@@ -20,12 +20,11 @@
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="text-center">Nama Lengkap :</th>
-				                <th class="text-center">No HP :</th>
-				                <th class="text-center">Alamat :</th>
-				                <th class="text-center">Tempat lahir :</th>
+								<th class="text-center">Nama Lengkap</th>
+				                <th class="text-center">No HP</th>
+				                <th class="text-center">Alamat</th>
+				                <th class="text-center">Tempat lahir</th>
 				                <th class="text-center">CV</th>
-				                <th class="text-center">Atur</th>
 				            </tr>
 						</thead>
 							<tbody>
@@ -41,8 +40,6 @@
 				                    <span class="glyphicon glyphicon-ok"></span> Terima</a>
 				                    <a class="btn btn-warning" href="{{ URL::route( 'olah.tolak', $usd->user_id)  }}">
 				                    <span class="glyphicon glyphicon-remove"></span> Tolak</a></td>
-				                    <td class="text-center"><a class="btn btn-danger" href="{{ route( 'olah.destroy', $usd->id)  }}" data-method="delete"> <!-- belum berfungsi -->
-				                    <span class="glyphicon glyphicon-trash"></span> Hapus</a></td>
 			                    </tr>
 			@endforeach
 							</tbody>
